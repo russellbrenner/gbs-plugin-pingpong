@@ -1,0 +1,45 @@
+{
+  "name": "gbs-plugin-pingpong",
+  "version": "0.1.0",
+  "description": "GB Studio plugin for Crackout/Breakout-style ball physics with angle-based paddle reflection",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint 'plugins/**/*.js' 'test/**/*.js'",
+    "lint:fix": "eslint --fix 'plugins/**/*.js' 'test/**/*.js'",
+    "format": "prettier --write 'plugins/**/*.js' 'test/**/*.js'",
+    "format:check": "prettier --check 'plugins/**/*.js' 'test/**/*.js'",
+    "validate": "npm run lint && npm run format:check && npm test",
+    "emulate": "open -a mGBA demo/build/rom.gb || mgba demo/build/rom.gb"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/russellbrenner/gbs-plugin-pingpong.git"
+  },
+  "keywords": [
+    "gameboy",
+    "gb-studio",
+    "plugin",
+    "pong",
+    "breakout",
+    "crackout",
+    "physics",
+    "chiptune"
+  ],
+  "author": "Russell Brenner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/russellbrenner/gbs-plugin-pingpong/issues"
+  },
+  "homepage": "https://github.com/russellbrenner/gbs-plugin-pingpong#readme",
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.2.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

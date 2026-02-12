@@ -1,0 +1,107 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Check formatting
+        run: npm run format:check
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test -- --coverage
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage/lcov.info
+          fail_ci_if_error: false
+
+  validate-plugin:
+    name: Validate Plugin Structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check plugin directory exists
+        run: test -d "plugins/PingPong Physics"
+
+      - name: Check engine.json exists and is valid JSON
+        run: |
+          test -f "plugins/PingPong Physics/engine/engine.json"
+          python3 -c "import json; json.load(open('plugins/PingPong Physics/engine/engine.json'))"
+
+      - name: Check engine version is set
+        run: |
+          VERSION=$(python3 -c "import json; print(json.load(open('plugins/PingPong Physics/engine/engine.json'))['version'])")
+          echo "Engine version: $VERSION"
+          test -n "$VERSION"
+
+      - name: Check event files have correct prefix
+        run: |
+          for f in plugins/PingPong\ Physics/events/*.js; do
+            basename "$f" | grep -q "^event" || (echo "Event file $f doesn't start with 'event' prefix" && exit 1)
+          done
+          echo "All event files have correct prefix"
+
+      - name: Check required C files exist
+        run: |
+          test -f "plugins/PingPong Physics/engine/src/core/fixed_point.h"
+          test -f "plugins/PingPong Physics/engine/src/core/trig_tables.h"
+          test -f "plugins/PingPong Physics/engine/src/states/pingpong.c"
+
+  # Future: Build and test ROM when GB Studio CLI is available
+  # build-rom:
+  #   name: Build Demo ROM
+  #   runs-on: ubuntu-latest
+  #   needs: [lint, test, validate-plugin]
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Install GB Studio CLI
+  #     - name: Build demo project
+  #     - name: Upload ROM artifact
+
+  # Future: Emulator testing
+  # emulate:
+  #   name: Test in mGBA
+  #   runs-on: ubuntu-latest
+  #   needs: build-rom
+  #   steps:
+  #     - name: Download ROM
+  #     - name: Install mGBA
+  #     - name: Run headless test

@@ -1,0 +1,41 @@
+{
+  "version": "4.0.0-e0",
+  "fields": [
+    {
+      "key": "pingpong_ball_speed",
+      "label": "Ball Speed",
+      "group": "GAMETYPE_PINGPONG",
+      "type": "slider",
+      "cType": "UBYTE",
+      "defaultValue": 2,
+      "min": 1,
+      "max": 8
+    },
+    {
+      "key": "pingpong_max_angle",
+      "label": "Max Reflection Angle",
+      "group": "GAMETYPE_PINGPONG",
+      "type": "slider",
+      "cType": "UBYTE",
+      "defaultValue": 60,
+      "min": 30,
+      "max": 80
+    },
+    {
+      "key": "pingpong_paddle_width",
+      "label": "Paddle Width (pixels)",
+      "group": "GAMETYPE_PINGPONG",
+      "type": "slider",
+      "cType": "UBYTE",
+      "defaultValue": 24,
+      "min": 8,
+      "max": 48
+    }
+  ],
+  "sceneTypes": [
+    {
+      "key": "pingpong",
+      "label": "PingPong Game"
+    }
+  ]
+}
