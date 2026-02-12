@@ -24,6 +24,8 @@ coverage/
 # GB Studio build artifacts
 demo/build/
 demo/*.gb
+build/
+out/
 
 # Logs
 *.log

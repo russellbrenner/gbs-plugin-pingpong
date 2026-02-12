@@ -1,0 +1,44 @@
+{
+  "_resourceType": "project",
+  "name": "PingPong Physics Demo",
+  "author": "Russell Brenner",
+  "version": "1.0.0",
+  "release": "1",
+  "notes": "Demo project for testing PingPong Physics plugin",
+  "settings": {
+    "startSceneId": "",
+    "startX": 0,
+    "startY": 0,
+    "playerSpriteSheetId": "",
+    "defaultBackgroundPaletteIds": [],
+    "defaultSpritePaletteIds": [],
+    "defaultPlayerSprites": {}
+  },
+  "scenes": [],
+  "backgrounds": [],
+  "spriteSheets": [],
+  "palettes": [],
+  "customEvents": [],
+  "music": [],
+  "sounds": [],
+  "fonts": [],
+  "avatars": [],
+  "emotes": [],
+  "tilesets": [],
+  "variables": [],
+  "constants": [],
+  "engineFieldValues": [
+    {
+      "id": "pingpong_ball_speed",
+      "value": 2
+    },
+    {
+      "id": "pingpong_max_angle",
+      "value": 60
+    },
+    {
+      "id": "pingpong_paddle_width",
+      "value": 24
+    }
+  ]
+}
